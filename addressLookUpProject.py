@@ -25,14 +25,17 @@ def addressToArray(addressVar):
 
 
 print("Enter address of file which contains students addresses")
-print("It must be an excel file ")
+print("It must be an excel file and enter with no spaces")
 print("EXAMPLE: C :\ user\ desktop\ file.xlsx")
 addressVar=str(input(""))
+addressVar = re.sub(r"\s+", "", addressVar, flags=re.UNICODE)
 
 print("Enter address of file which contains addresses and quintile scores (the file downloaded)")
-print("It must be a CSV file ")
+print("It must be a CSV file and enter with no spaces")
 print("EXAMPLE: C :\ user\ desktop\ file.CSV")
 scoreVar=str(input(""))
+scoreVar = re.sub(r"\s+", "", scoreVar, flags=re.UNICODE)
+
 addressArray=readAddressFile(scoreVar)
 schoolArray=addressToArray(addressVar)
 
