@@ -23,7 +23,8 @@ def addressToArray(addressVar):
         array[x]=var
     return array
 
-
+print("ALL FILES MUST BE CLOSED WHEN PROGRAM IS RUNNING")
+print("")
 print("Enter address of file which contains students addresses")
 print("It must be an excel file and enter with no spaces")
 print("EXAMPLE: C :\ user\ desktop\ file.xlsx")
@@ -92,6 +93,7 @@ df.to_excel(addressVar)
 
 # In[ ]:
 
-
+print("Task Finished")
+print("You can now open your student address file")
 
 
