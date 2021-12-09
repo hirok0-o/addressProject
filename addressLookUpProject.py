@@ -3,11 +3,20 @@
 
 # In[25]:
 
+#i didnt write this pip install code, got from: https://stackoverflow.com/questions/44210656/how-to-check-if-a-module-is-installed-in-python-and-if-not-install-it-within-t
+import sys
+import subprocess
+import os
+
+
+if not 'panda' in sys.modules:
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'pandas']) 
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'xlrd']) 
 
 import pandas as pd
 import re
 #function converts useful file contents to 2D array#
-def readAddressFile(scroreVar):
+def readAddressFile(scoreVar):
     df=pd.read_csv(scoreVar,usecols=[0,2])
     array=[]
     array=df.values.tolist()
@@ -25,17 +34,17 @@ def addressToArray(addressVar):
 
 print("ALL FILES MUST BE CLOSED WHEN PROGRAM IS RUNNING")
 print("")
-print("Enter address of file which contains students addresses")
-print("It must be an excel file and enter with no spaces")
-print("EXAMPLE: C :\ user\ desktop\ file.xlsx")
-addressVar=str(input(""))
-addressVar = re.sub(r"\s+", "", addressVar, flags=re.UNICODE)
 
-print("Enter address of file which contains addresses and quintile scores (the file downloaded)")
-print("It must be a CSV file and enter with no spaces")
-print("EXAMPLE: C :\ user\ desktop\ file.CSV")
-scoreVar=str(input(""))
-scoreVar = re.sub(r"\s+", "", scoreVar, flags=re.UNICODE)
+print("Enter path of folder which stores both files, example: C :\ user \ documents \ addressLookUp")
+root=str(input("> "))
+root=re.sub(r"\s+", "", root, flags=re.UNICODE)
+for root,dirs,files in os.walk(root):
+    for file in files:
+        if ".csv" in file:
+            scoreVar=os.path.join(root,file)
+        if ".xlsx" in file:
+            addressVar=os.path.join(root,file)
+
 
 addressArray=readAddressFile(scoreVar)
 schoolArray=addressToArray(addressVar)
@@ -95,5 +104,4 @@ df.to_excel(addressVar)
 
 print("Task Finished")
 print("You can now open your student address file")
-
 
